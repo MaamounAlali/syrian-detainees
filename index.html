@@ -63,7 +63,18 @@
 
     <section class="notice" aria-label="تنبيه حول البيانات">
       <strong>ملاحظة حول البيانات</strong>
-      <p>تعرض الصفحة المعلومات الموجودة في الملف فقط. أي حقل غير متوفر يبقى فارغاً، ولا تتم إضافة أو استنتاج معلومات غير موجودة في المصدر.</p>
+      <p>المعلومات معروضة كما وردت في القائمة الأصلية، وقد تتضمن أخطاء أو نقصاً في المصدر. يمكن مراجعة صور القائمة الأصلية في قسم المرفقات أدناه.</p>
+    </section>
+
+    <section class="attachments-section" aria-labelledby="attachments-title">
+      <div class="attachments-heading">
+        <div>
+          <h2 id="attachments-title">صور القائمة الأصلية</h2>
+          <p>اضغط على أي صورة لعرضها بالحجم الكامل والتنقل بين الصفحات.</p>
+        </div>
+        <span>٧٠ صورة</span>
+      </div>
+      <div id="attachmentGallery" class="attachment-gallery"></div>
     </section>
 
     <section class="results-section" aria-live="polite" aria-busy="false">
@@ -84,6 +95,18 @@
   <footer class="site-footer">
     <div class="container">المعلومات معروضة كما وردت في القائمة الأصلية، وقد تتضمن أخطاء أو نقصاً في المصدر.</div>
   </footer>
+
+  <dialog id="imagePreview" class="image-preview" aria-labelledby="previewTitle">
+    <div class="preview-toolbar">
+      <strong id="previewTitle">صورة من القائمة الأصلية</strong>
+      <button id="closePreview" type="button" aria-label="إغلاق المعاينة">إغلاق</button>
+    </div>
+    <div class="preview-stage">
+      <button id="previousImage" class="preview-nav previous" type="button" aria-label="الصورة السابقة">السابق</button>
+      <img id="previewImage" alt="">
+      <button id="nextImage" class="preview-nav next" type="button" aria-label="الصورة التالية">التالي</button>
+    </div>
+  </dialog>
 
   <script src="data.js"></script>
   <script src="app.js"></script>

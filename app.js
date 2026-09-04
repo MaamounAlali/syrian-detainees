@@ -11,9 +11,51 @@
   const resultsCount = document.getElementById('resultsCount');
   const recordCount = document.getElementById('recordCount');
   const section = document.querySelector('.results-section');
+  const attachmentGallery = document.getElementById('attachmentGallery');
+  const imagePreview = document.getElementById('imagePreview');
+  const previewImage = document.getElementById('previewImage');
+  const previewTitle = document.getElementById('previewTitle');
+  const closePreview = document.getElementById('closePreview');
+  const previousImage = document.getElementById('previousImage');
+  const nextImage = document.getElementById('nextImage');
   const MAX_RESULTS = 150;
+  const ATTACHMENT_COUNT = 70;
+  let activeImage = 1;
 
   recordCount.textContent = new Intl.NumberFormat('ar').format(data.length);
+
+  function attachmentPath(number) {
+    return `attachments/page-${String(number).padStart(2, '0')}.webp`;
+  }
+
+  function showAttachment(number) {
+    activeImage = ((number - 1 + ATTACHMENT_COUNT) % ATTACHMENT_COUNT) + 1;
+    const arabicNumber = new Intl.NumberFormat('ar').format(activeImage);
+    previewImage.src = attachmentPath(activeImage);
+    previewImage.alt = `صورة الصفحة ${arabicNumber} من القائمة الأصلية`;
+    previewTitle.textContent = `الصورة ${arabicNumber} من ${new Intl.NumberFormat('ar').format(ATTACHMENT_COUNT)}`;
+    if (!imagePreview.open) imagePreview.showModal();
+  }
+
+  attachmentGallery.innerHTML = Array.from({ length: ATTACHMENT_COUNT }, (_, index) => {
+    const number = index + 1;
+    const label = new Intl.NumberFormat('ar').format(number);
+    return `<button class="attachment-button" type="button" data-attachment="${number}" aria-label="عرض الصورة ${label}">
+      <img src="${attachmentPath(number)}" alt="صورة مصغرة للصفحة ${label}" loading="lazy">
+      <span>صفحة ${label}</span>
+    </button>`;
+  }).join('');
+
+  attachmentGallery.addEventListener('click', event => {
+    const button = event.target.closest('[data-attachment]');
+    if (button) showAttachment(Number(button.dataset.attachment));
+  });
+  closePreview.addEventListener('click', () => imagePreview.close());
+  previousImage.addEventListener('click', () => showAttachment(activeImage - 1));
+  nextImage.addEventListener('click', () => showAttachment(activeImage + 1));
+  imagePreview.addEventListener('click', event => {
+    if (event.target === imagePreview) imagePreview.close();
+  });
 
   const digitMap = {
     '٠':'0','١':'1','٢':'2','٣':'3','٤':'4','٥':'5','٦':'6','٧':'7','٨':'8','٩':'9',
