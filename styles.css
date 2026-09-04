@@ -156,7 +156,7 @@ h1 {
 .notice p { margin: 3px 0 0; color: #5e5d58; font-size: 12px; }
 
 .attachments-section {
-  margin-bottom: 14px;
+  margin-top: 14px;
   padding: 18px;
   background: var(--paper);
   border: 1px solid var(--line);
