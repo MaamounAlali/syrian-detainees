@@ -7,6 +7,7 @@
   const cityInput = document.getElementById('cityInput');
   const clearButton = document.getElementById('clearButton');
   const resultsEl = document.getElementById('results');
+  const resultsTableWrapper = document.getElementById('resultsTableWrapper');
   const emptyState = document.getElementById('emptyState');
   const resultsCount = document.getElementById('resultsCount');
   const recordCount = document.getElementById('recordCount');
@@ -119,32 +120,24 @@
     return `${escapeHtml(source.slice(0, index))}<mark>${escapeHtml(source.slice(index, index + q.length))}</mark>${escapeHtml(source.slice(index + q.length))}`;
   }
 
-  function detail(label, value, rawQuery = '') {
+  function tableCell(label, value, rawQuery = '', className = '') {
     const missing = !String(value || '').trim();
-    return `
-      <div class="detail">
-        <dt>${escapeHtml(label)}</dt>
-        <dd class="${missing ? 'missing' : ''}">${missing ? 'غير متوفر' : highlight(value, rawQuery)}</dd>
-      </div>`;
+    return `<td data-label="${escapeHtml(label)}" class="${missing ? 'missing ' : ''}${className}">${missing ? 'غير متوفر' : highlight(value, rawQuery)}</td>`;
   }
 
-  function card(record, queries) {
+  function row(record, queries) {
     return `
-      <article class="result-card">
-        <div class="result-head">
-          <h3 class="result-name">${highlight(record.name, queries.nameRaw)}</h3>
-          <span class="result-number">رقم ${escapeHtml(record.number || '—')}</span>
-        </div>
-        <dl class="details-grid">
-          ${detail('اسم الأم', record.mother, queries.motherRaw)}
-          ${detail('المدينة', record.city, queries.cityRaw)}
-          ${record.other ? detail('معلومات أخرى', record.other) : ''}
-        </dl>
-      </article>`;
+      <tr>
+        ${tableCell('الاسم', record.name, queries.nameRaw, 'name-cell')}
+        ${tableCell('اسم الأم', record.mother, queries.motherRaw)}
+        ${tableCell('المدينة', record.city, queries.cityRaw)}
+        ${tableCell('الرقم', record.number, '', 'number-cell')}
+        ${tableCell('معلومات أخرى', record.other)}
+      </tr>`;
   }
 
   function showInitial() {
-    resultsEl.hidden = true;
+    resultsTableWrapper.hidden = true;
     resultsEl.innerHTML = '';
     emptyState.hidden = false;
     emptyState.innerHTML = `
@@ -155,7 +148,7 @@
   }
 
   function showNoResults() {
-    resultsEl.hidden = true;
+    resultsTableWrapper.hidden = true;
     resultsEl.innerHTML = '';
     emptyState.hidden = false;
     emptyState.innerHTML = `
@@ -209,8 +202,8 @@
 
     const visible = matches.slice(0, MAX_RESULTS);
     const queries = { nameRaw, motherRaw, cityRaw };
-    resultsEl.innerHTML = visible.map(({ record }) => card(record, queries)).join('');
-    resultsEl.hidden = false;
+    resultsEl.innerHTML = visible.map(({ record }) => row(record, queries)).join('');
+    resultsTableWrapper.hidden = false;
     emptyState.hidden = true;
 
     const nf = new Intl.NumberFormat('ar');
