@@ -343,8 +343,16 @@ mark {
   .results-table .name-cell {
     margin-bottom: 7px;
     padding-bottom: 11px;
+    display: block;
     border-bottom: 1px solid var(--line);
     font-size: 16px;
+    white-space: nowrap;
+    overflow-x: auto;
+    scrollbar-width: thin;
+  }
+  .results-table .name-cell::before {
+    display: block;
+    margin-bottom: 4px;
   }
 }
 
