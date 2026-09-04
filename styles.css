@@ -293,6 +293,8 @@ mark {
 .empty-state h3 { margin: 0; color: var(--text); font-size: 16px; }
 .empty-state p { margin: 6px auto 0; max-width: 520px; font-size: 13px; }
 .site-footer { padding: 0 0 30px; color: #77756f; font-size: 11px; }
+.site-footer a { color: #4f4e49; font-weight: 700; text-underline-offset: 3px; }
+.site-footer a:hover { color: var(--accent); }
 
 @media (min-width: 680px) {
   .container { width: min(calc(100% - 48px), 1080px); }
