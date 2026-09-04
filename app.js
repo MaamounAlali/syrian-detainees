@@ -72,10 +72,11 @@
       .normalize('NFKD')
       .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED]/g, '')
       .replace(/[أإآٱ]/g, 'ا')
-      .replace(/ى/g, 'ي')
+      .replace(/[ىیے]/g, 'ي')
       .replace(/ؤ/g, 'و')
       .replace(/ئ/g, 'ي')
-      .replace(/ة/g, 'ه')
+      .replace(/[ةۀہھ]/g, 'ه')
+      .replace(/[کڪ]/g, 'ك')
       .replace(/ـ/g, '')
       .replace(/[^\u0600-\u06FFa-zA-Z0-9\s]/g, ' ')
       .replace(/\s+/g, ' ')
@@ -96,6 +97,7 @@
     if (!query) return true;
     if (!haystack) return false;
     if (haystack.includes(query)) return true;
+    if (haystack.replace(/\s/g, '').includes(query.replace(/\s/g, ''))) return true;
     const tokens = query.split(' ').filter(Boolean);
     return tokens.length > 1 && tokens.every(token => haystack.includes(token));
   }
