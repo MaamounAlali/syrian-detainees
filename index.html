@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="قائمة بأسماء المعتقلين السوريين في العراق مع إمكانية البحث بالاسم واسم الأم والمدينة.">
+  <title>قائمة بأسماء المعتقلين السوريين في العراق</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-copy">
+        <h1>قائمة بأسماء المعتقلين السوريين في العراق</h1>
+        <p>أداة للبحث في الأسماء الواردة في القائمة المرفقة، مع عرض المعلومات المتاحة لكل اسم كما وردت في المصدر.</p>
+      </div>
+      <div class="header-meta" aria-label="عدد السجلات">
+        <strong id="recordCount">—</strong>
+        <span>اسماً في القائمة</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container page-shell">
+    <section class="search-section" aria-labelledby="search-title">
+      <div class="section-heading">
+        <div>
+          <h2 id="search-title">البحث في القائمة</h2>
+          <p>يمكن استخدام حقل واحد أو الجمع بين أكثر من حقل لتضييق النتائج.</p>
+        </div>
+      </div>
+
+      <div class="search-grid">
+        <div class="field field-primary">
+          <label for="nameInput">الاسم</label>
+          <div class="input-wrap">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+            <input id="nameInput" type="search" autocomplete="off" placeholder="اكتب الاسم أو جزءاً منه">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="motherInput">اسم الأم</label>
+          <div class="input-wrap">
+            <input id="motherInput" type="search" autocomplete="off" placeholder="مثال: فاطمة">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cityInput">المدينة</label>
+          <div class="input-wrap">
+            <input id="cityInput" type="search" autocomplete="off" placeholder="مثال: حلب">
+          </div>
+        </div>
+      </div>
+
+      <div class="search-actions">
+        <p class="search-help">البحث في الأسماء يتجاهل التشكيل والاختلافات الشائعة مثل أ/إ/آ وى/ي.</p>
+        <button id="clearButton" class="clear-button" type="button" hidden>مسح البحث</button>
+      </div>
+    </section>
+
+    <section class="notice" aria-label="تنبيه حول البيانات">
+      <strong>ملاحظة حول البيانات</strong>
+      <p>تعرض الصفحة المعلومات الموجودة في الملف فقط. أي حقل غير متوفر يبقى فارغاً، ولا تتم إضافة أو استنتاج معلومات غير موجودة في المصدر.</p>
+    </section>
+
+    <section class="results-section" aria-live="polite" aria-busy="false">
+      <div class="results-toolbar">
+        <h2>النتائج</h2>
+        <span id="resultsCount" class="results-count">ابدأ بإدخال بيانات البحث</span>
+      </div>
+
+      <div id="emptyState" class="empty-state">
+        <h3>ابحث عن اسم في القائمة</h3>
+        <p>اكتب حرفين على الأقل في الاسم أو اسم الأم أو المدينة.</p>
+      </div>
+
+      <div id="results" class="results-list" hidden></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">المعلومات معروضة كما وردت في القائمة الأصلية، وقد تتضمن أخطاء أو نقصاً في المصدر.</div>
+  </footer>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
